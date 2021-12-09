@@ -1,0 +1,47 @@
+
+<!-- *ngIf="message" [routerLink]="'/message/' + message.id" [detail]="false" -->
+<ion-grid fixed>
+  <ion-row>
+    <ion-col style="align-self: center;">
+      <ion-button (click)="cargarListadoSolar()">
+        Filtro
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  
+  
+</ion-grid>
+
+<ion-grid *ngIf="!flagSolar">
+  <ion-row>
+    <ion-col size="3" *ngFor="let item of pokemon; index as i">
+      <ion-card routerLink="/detalle/{{item.entry_number}}">
+        <ion-img src='../../assets/img/pokemon/{{imgIterador[i]}}.png'></ion-img>
+        <ion-card-header>
+          <ion-card-title>{{item.pokemon_species.name | titlecase}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid *ngIf="flagSolar">
+  <ion-row>
+    <ion-col size="3" *ngFor="let item of pokemonSolar; index as i">
+      <ion-card>
+        <!-- <ion-img src='../../assets/img/pokemon/{{imgIterador[i]}}.png'></ion-img> -->
+        <ion-card-header>
+          <ion-card-title>{{item.pokemon.name | titlecase}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+  
+  
