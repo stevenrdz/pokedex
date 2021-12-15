@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { PokemonComponentModule } from '../pokemon/pokemon.module';
+import { DetallePokemonPageModule } from '../detalle-pokemon/detalle-pokemon.module';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { PokemonComponentModule } from '../pokemon/pokemon.module';
     FormsModule,
     IonicModule,
     PokemonComponentModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    DetallePokemonPageModule
   ],
   declarations: [HomePage]
 })

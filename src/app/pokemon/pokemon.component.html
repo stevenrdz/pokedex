@@ -1,43 +1,51 @@
 
 <!-- *ngIf="message" [routerLink]="'/message/' + message.id" [detail]="false" -->
-<ion-grid fixed>
+<ion-grid [fixed]="true">
   <ion-row>
-    <ion-col style="align-self: center;">
-      <ion-button (click)="cargarListadoSolar()">
-        Filtro
-      </ion-button>
-    </ion-col>
-    <ion-col>
+    <ion-col size-lg="12">
       <ion-item>
-        <ion-label position="floating">Description</ion-label>
-        <ion-textarea></ion-textarea>
+        <ion-toolbar>
+          <ion-searchbar type="text" name="filtrarPokemon"
+           [(ngModel)]="filtrarPokemon" placeholder="Buscar pokemon..."  class="forms-control"></ion-searchbar>
+        </ion-toolbar>
       </ion-item>
     </ion-col>
   </ion-row>
-  
-  
+  <ion-row>
+    <ion-col size-lg="12" style="align-self: center; text-align: right;">
+      <ion-button (click)="cargarListadoSolar()">
+        Solares
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-grid>
 
-<ion-grid *ngIf="!flagSolar">
+<ion-grid [fixed]="true" *ngIf="!flagSolar">
   <ion-row>
-    <ion-col size="3" *ngFor="let item of pokemon; index as i">
-      <ion-card routerLink="/detalle/{{item.entry_number}}">
-        <ion-img src='../../assets/img/pokemon/{{imgIterador[i]}}.png'></ion-img>
+    <ion-col size-lg="4" *ngFor="let item of pokemon | busqueda: filtrarPokemon; index as i " >
+      <!-- routerLink="/detalle/{{item.entry_number}}" -->
+      <ion-card (click)="DetallePokemonModal(item.entry_number)" >
+        <ion-img style="background-color: lightgray;" 
+        src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{item.entry_number}}.png'>
+      </ion-img>
         <ion-card-header>
-          <ion-card-title>{{item.pokemon_species.name | titlecase}}</ion-card-title>
+          <ion-card-subtitle>Pokemon:</ion-card-subtitle>
+          <ion-card-title>{{item.pokemon_species.name | titlecase }}</ion-card-title>
         </ion-card-header>
       </ion-card>
     </ion-col>
   </ion-row>
 </ion-grid>
 
-<ion-grid *ngIf="flagSolar">
+<ion-grid [fixed]="true" *ngIf="flagSolar">
   <ion-row>
-    <ion-col size="3" *ngFor="let item of pokemonSolar; index as i">
+    <ion-col size-lg="4" *ngFor="let item of pokemonSolar; index as i">
       <ion-card>
-        <!-- <ion-img src='../../assets/img/pokemon/{{imgIterador[i]}}.png'></ion-img> -->
+        <ion-img style="background-color: lightgray;" 
+        src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{item.pokemon.url}}.png'>
+      </ion-img>
         <ion-card-header>
-          <ion-card-title>{{item.pokemon.name | titlecase}}</ion-card-title>
+            <ion-card-title>{{item.pokemon.name | titlecase}}</ion-card-title>
         </ion-card-header>
       </ion-card>
     </ion-col>
