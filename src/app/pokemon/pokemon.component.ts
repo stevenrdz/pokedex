@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { PokedexService } from '../services/pokedex.service';
 import { PokemonEntry } from '../interfaces/pokemon.interface';
 import { Pokemon } from '../interfaces/poder-solar.interface';
@@ -8,7 +8,6 @@ import { DetallePokemonPage } from '../detalle-pokemon/detalle-pokemon.page';
 import { Ability } from '../interfaces/habilidad-pokemon.interface';
 
 import { IonInfiniteScroll } from '@ionic/angular';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-pokemon',
@@ -22,10 +21,8 @@ export class PokemonComponent{
   filtrarPokemon: string = '';
   pokemon: PokemonEntry[] = [];
   pokemonSolar: Pokemon[] = [];
-  imgIterador: String[] = [];
   flagSolar: Boolean = false;
-  habilidadPokemon: Ability[] = [];
-
+  
   constructor(
     private pokedexService: PokedexService,
     public modalController: ModalController) { this.cargarListado(); }
@@ -36,9 +33,6 @@ export class PokemonComponent{
     this.pokedexService.listarPokemon().subscribe(
       (resp => {
         if(resp.estado){
-          for(let i of resp.datos.pokemon_entries){
-            this.imgIterador.push(fill(String(i.entry_number),3));
-          }
           this.pokemon = resp.datos.pokemon_entries;
         }else{ console.log("No existen pokemones"); }
       })
@@ -73,18 +67,4 @@ export class PokemonComponent{
     });
     return await modal.present();
   }
-
-  /* loadData(event) {
-    setTimeout(() => {
-      console.log('Done');
-      event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (data.length == 1000) {
-        event.target.disabled = true;
-      }
-    }, 500); 
-  }*/
-  
 }

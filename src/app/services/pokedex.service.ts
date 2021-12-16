@@ -23,13 +23,12 @@ export class PokedexService {
   detallePokemon(params: Number){
     return this.http.get<DetallePokemon>(`${this.baseUrl}/pokemon/especie/${params}`);
   }
-
   habilidadPokemon(params: Number){
     return this.http.get<HabilidadesPokemon>(`${this.baseUrl}/pokemon/habilidades/${params}`);
   }
 
   poderSolarPokemon(){
-    return this.http.get<PoderSolar>(`${this.baseUrl}/pokemon/habilidadSolar/`);
+    return this.http.get<PoderSolar>(`${this.baseUrl}/pokemon/habilidadSolar`);
   }
 
 }

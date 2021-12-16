@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { PokedexService } from '../services/pokedex.service';
 
 import { Ability } from '../interfaces/habilidad-pokemon.interface';
